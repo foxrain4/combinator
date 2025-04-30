@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEP - Prefix Object/Room Names in Quest</title>
+    <style>
+        body {
+            background-color: #2e2e2e;
+            color: #f0f0f0;
+            font-family: Georgia, serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #3c3c3c;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            color: #ffcc00;
+        }
+        h2 {
+            font-size: 28px;
+            color: #ffcc00;
+            margin-top: 40px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        code {
+            background-color: #4c4c4c;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .step {
+            background-color: #555555;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .example {
+            background-color: #3c3c3c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How to Quickly Prefix Object & Room Names in Quest .aslx Files</h1>
+        <h2>Goal</h2>
+        <p>Avoid manual renaming of 600+ objects/rooms in a Quest game file by automatically adding prefixes (like <code>f_</code> for Fishvale or <code>s_</code> for Sekiro) to all <code>&lt;object&gt;</code> and <code>&lt;room&gt;</code> names.</p>
+
+        <h2>Step-by-Step in Notepad++</h2>
+
+        <div class="step">
+            <p><strong>1. Open Notepad++</strong><br>Open your <code>.aslx</code> game file.</p>
+            <p><strong>2. Open Replace Tool</strong><br>Press <code>Ctrl + H</code> to open the Find and Replace panel.</p>
+            <p><strong>3. Settings</strong><br>
+                <strong>Find what:</strong> <code>&lt;(object|room) name="([^"]+)"&gt;</code><br>
+                <strong>Replace with:</strong> <code>&lt;\1 name="f_\2"&gt;</code> (Replace <code>f_</code> with any prefix you need)<br>
+                <strong>Search Mode:</strong> Regular expression<br>
+                <strong>Don’t check:</strong> “Extended” or “Normal”
+            </p>
+            <p><strong>4. Click "Replace All"</strong><br>Done! All object and room names are now safely prefixed.</p>
+        </div>
+
+        <h2>Example</h2>
+        <div class="example">
+            <p><strong>Before:</strong></p>
+            <code>&lt;object name="cat"&gt;</code><br>
+            <code>&lt;room name="tower"&gt;</code><br>
+            <p><strong>After:</strong></p>
+            <code>&lt;object name="f_cat"&gt;</code><br>
+            <code>&lt;room name="f_tower"&gt;</code>
+        </div>
+
+        <h2>Pro Tips</h2>
+        <ul>
+            <li>Repeat for Sekiro objects with <code>s_</code></li>
+            <li>Do <strong>not</strong> touch:
+                <ul>
+                    <li><code>&lt;inherit name="..." /&gt;</code></li>
+                    <li><code>&lt;attr name="..." /&gt;</code></li>
+                </ul>
+            </li>
+            <li>They are not real objects and will break if renamed.</li>
+        </ul>
+
+        <h2>Why This Works</h2>
+        <ul>
+            <li>No manual renaming</li>
+            <li>No JavaScript or scripting</li>
+            <li>Compatible with all Quest tools</li>
+            <li>Works instantly even for huge files</li>
+        </ul>
+    </div>
+</body>
+</html>
